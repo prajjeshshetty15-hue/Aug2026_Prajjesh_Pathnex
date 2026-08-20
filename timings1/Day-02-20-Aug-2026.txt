@@ -1,0 +1,9 @@
+Todays Task
+
+leant about terraform
+terraform installation about 2 hours creating EC2 installation 
+then installed git.
+Git push to git git hub 1 hr
+morning session on terraform for 3 hors.
+
+
