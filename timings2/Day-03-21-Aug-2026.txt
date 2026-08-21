@@ -1,0 +1,13 @@
+
+
+Today's Task
+
+3 hours of session in the morning on terraform
+Ceating EC2 instance using terraform.tfstate for 30 min
+create S3 bucket in AWS 30 min
+merge using terform 30 min
+introduction video preparation 30 min
+practical exercise for 2 hours 
+
+
+
