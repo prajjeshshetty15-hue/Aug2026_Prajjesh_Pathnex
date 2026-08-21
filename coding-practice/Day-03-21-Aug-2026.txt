@@ -1,0 +1,17 @@
+
+
+coding Practice
+
+[200~terraform {
+  backend "s3" {
+    bucket = "prajjesh-terraform-state-2026"
+    key    = "terraform/terraform.tfstate"
+    region = "ap-south-1"
+  }
+}
+
+create terraform by createing terraform tf.file
+then create backend.tf file
+then create the bucket in S3
+merge into s3 from local
+
