@@ -1,0 +1,138 @@
+
+coding practice
+
+terraform {
+  required_version = ">= 1.5.0"
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
+  }
+}
+
+provider "aws" {
+  region = "ap-south-1"
+}
+
+# Get default VPC
+data "aws_vpc" "default" {
+  default = true
+}
+
+# Get a subnet from the default VPC
+data "aws_subnets" "default" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
+}
+
+# Get latest Amazon Linux 2023 AMI
+data "aws_ssm_parameter" "amazon_linux" {
+  name = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-6.1-x86_64"
+}
+
+# Get existing default security group
+data "aws_security_group" "default" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
+
+  filter {
+    name   = "group-name"
+    values = ["default"]
+  }
+}
+
+# --------------------------------------------------
+# EC2 INSTANCE 1
+# --------------------------------------------------
+
+resource "aws_instance" "instance_1" {
+
+  ami           = data.aws_ssm_parameter.amazon_linux.value
+  instance_type = "t3.micro"
+
+  key_name = "devops-key"
+
+  subnet_id = data.aws_subnets.default.ids[0]
+
+  vpc_security_group_ids = [
+    data.aws_security_group.default.id
+  ]
+
+  associate_public_ip_address = true
+
+  tags = {
+    Name = "terraform-instance-1"
+  }
+}
+
+# --------------------------------------------------
+# EC2 INSTANCE 2
+# --------------------------------------------------
+
+resource "aws_instance" "instance_2" {
+
+  ami           = data.aws_ssm_parameter.amazon_linux.value
+  instance_type = "m7i-flex.large"
+
+  key_name = "devops-key"
+
+  subnet_id = data.aws_subnets.default.ids[0]
+
+  vpc_security_group_ids = [
+    data.aws_security_group.default.id
+  ]
+
+  associate_public_ip_address = true
+
+  tags = {
+    Name = "terraform-instance-2"
+  }
+}
+
+# --------------------------------------------------
+# OUTPUTS
+# --------------------------------------------------
+
+output "instance_1_public_ip" {
+  value = aws_instance.instance_1.public_ip
+}
+
+output "instance_2_public_ip" {
+  value = aws_instance.instance_2.public_ip
+}
+
+output "instance_1_private_ip" {
+  value = aws_instance.instance_1.private_ip
+}
+
+output "instance_2_private_ip" {
+  value = aws_instance.instance_2.private_ip
+}
+
+output "instance_1_id" {
+  value = aws_instance.instance_1.id
+}
+
+output "instance_2_id" {
+  value = aws_instance.instance_2.id
+}
+
+
+
+coding practice:
+
+
+installed jenkins
+       -install stage view
+       -create pipeline
+       -write the script inside
+       -buid
+       -apply
+
+
