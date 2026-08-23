@@ -1,0 +1,10 @@
+
+
+Todays Task
+
+4 hours of morning session on CI/CD pipeline
+2 hours of session on installation GIT/JENKINS/Docker
+30 min introduction video
+
+
+
