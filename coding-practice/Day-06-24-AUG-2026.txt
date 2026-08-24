@@ -1,0 +1,67 @@
+
+
+Coding practice
+
+pipeline {
+
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                echo 'Checking out source code...'
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Build stage started'
+                echo 'Building the application...'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Test stage started'
+                echo 'Running tests...'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploy stage started'
+                echo 'Deploying the application...'
+            }
+        }
+    }
+
+    post {
+
+        success {
+            echo 'Jenkins Pipeline completed successfully!'
+        }
+
+        failure {
+            echo 'Jenkins Pipeline failed!'
+        }
+    }
+}
+
+
+Coding practice:
+
+Pipeline
+  agent any
+   stages
+     --checkout
+     --build
+     --Test
+     --Deploy
+   Post
+    --Success
+    --failure
+
+
+
