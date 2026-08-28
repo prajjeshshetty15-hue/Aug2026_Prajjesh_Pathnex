@@ -1,0 +1,11 @@
+
+
+Todays Task:
+
+3 hours for session on ansible concept
+30 min of prep on introduction video
+1 hour of git push
+3 hours of practice on practical ansible.
+
+
+
