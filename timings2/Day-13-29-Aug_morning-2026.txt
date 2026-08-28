@@ -1,0 +1,8 @@
+
+Todays Task:
+
+3 hours session on Terraform
+30 min of introduction preparation
+1 hour of Git push
+3 hour of practical on the topic
+
