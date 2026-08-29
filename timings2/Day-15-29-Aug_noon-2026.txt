@@ -1,0 +1,9 @@
+
+Todays Task:
+
+2 hours of session on grafana, argocd
+30 min introduction preparation
+1 hour of git push
+2 hour of practical
+
+
