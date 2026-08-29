@@ -1,0 +1,57 @@
+
+Coding Practice:
+
+variable "aws_region" {
+  description = "AWS region in which to create the TLS lab."
+  type        = string
+  default     = "ap-south-1"
+}
+
+variable "project_name" {
+  description = "Prefix used to name the lab resources."
+  type        = string
+  default     = "pathnex-tls"
+}
+
+variable "instance_type" {
+  description = "EC2 instance type used by the web server."
+  type        = string
+  default     = "t3.micro"
+}
+
+variable "allowed_https_cidr" {
+  description = "IPv4 CIDR allowed to reach HTTPS. Narrow this to your public IP/32 when possible."
+  type        = string
+  default     = "0.0.0.0/0"
+
+  validation {
+    condition     = can(cidrhost(var.allowed_https_cidr, 0))
+    error_message = "allowed_https_cidr must be a valid IPv4 CIDR."
+  }
+}
+
+
+Practice:
+
+Variable: aws region
+ dscription
+ type
+ default
+Variable: Project name
+ description
+ type
+ default
+variable: instance type
+ description
+ type
+ default
+varible: allowed https cidr
+ description
+ type
+ defualt
+
+Validation
+ condition
+ error message
+
+
