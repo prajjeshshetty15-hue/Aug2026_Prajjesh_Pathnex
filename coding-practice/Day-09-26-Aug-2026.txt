@@ -1,0 +1,13 @@
+---
+- name: Install Elasticsearch
+  hosts: elk
+  become: true
+
+  roles:
+    - elasticsearch---
+
+
+
+
+
+
