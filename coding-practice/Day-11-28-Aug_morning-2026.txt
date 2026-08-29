@@ -1,0 +1,153 @@
+
+Coding Practice:
+
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners      = ["099720109477"] # Canonical
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
+resource "aws_vpc" "pathnex" {
+  cidr_block           = "10.42.0.0/16"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
+
+  tags = { Name = var.project_name }
+}
+
+resource "aws_internet_gateway" "pathnex" {
+  vpc_id = aws_vpc.pathnex.id
+  tags   = { Name = var.project_name }
+}
+
+resource "aws_subnet" "public" {
+  vpc_id                  = aws_vpc.pathnex.id
+  cidr_block              = "10.42.1.0/24"
+  availability_zone       = data.aws_availability_zones.available.names[0]
+  map_public_ip_on_launch = true
+
+  tags = { Name = "${var.project_name}-public" }
+}
+
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.pathnex.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.pathnex.id
+  }
+
+  tags = { Name = "${var.project_name}-public" }
+}
+
+resource "aws_route_table_association" "public" {
+  subnet_id      = aws_subnet.public.id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_security_group" "web" {
+  name_prefix = "${var.project_name}-"
+  description = "Public HTTPS access for the TLS validation lab"
+  vpc_id      = aws_vpc.pathnex.id
+
+  ingress {
+    description = "HTTPS"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [var.allowed_https_cidr]
+  }
+
+  ingress {
+    description = "HTTP redirect to HTTPS"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = [var.allowed_https_cidr]
+  }
+
+  egress {
+    description = "Package installation and updates"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = { Name = "${var.project_name}-web" }
+}
+
+resource "aws_instance" "web" {
+  ami                         = data.aws_ami.ubuntu.id
+  instance_type               = var.instance_type
+  subnet_id                   = aws_subnet.public.id
+  vpc_security_group_ids      = [aws_security_group.web.id]
+  associate_public_ip_address = true
+
+  user_data = templatefile("${path.module}/templates/nginx-user-data.sh.tftpl", {
+    certificate = file("${path.module}/ssl/pathnex.crt")
+    private_key = file("${path.module}/ssl/pathnex.key")
+  })
+
+  user_data_replace_on_change = true
+
+  metadata_options {
+    http_endpoint = "enabled"
+    http_tokens   = "required"
+  }
+
+  root_block_device {
+    encrypted   = true
+    volume_size = 10
+    volume_type = "gp3"
+  }
+
+  depends_on = [aws_route_table_association.public]
+
+  tags = { Name = "${var.project_name}-web" }
+}
+
+
+
+
+Practice:
+data" aws availablity zones"
+data" aws_ami"
+   filter
+   filter
+resource" aws_vpc"
+resource" aws internt_gateway"
+resource" aws subnet"
+resource" aws route table"
+resource" aws route table association"
+resource" aws security group"
+ ingress
+      -description[HTTPS]
+ ingress
+      -description[HTTP redirect to HTTPS]
+ egress
+      -description[Package installation and updates]
+Resource"aws instance"
+metadata_options
+root_block_device
+
+
+
+
+
+
+
+
