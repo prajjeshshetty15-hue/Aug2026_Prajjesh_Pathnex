@@ -1,0 +1,59 @@
+
+Coding Practice:
+
+ name: Create a Kafka topic and verify the cluster
+  hosts: kafka[0]
+  become: true
+  become_user: kafka
+  gather_facts: false
+  vars:
+    topic_name: "{{ pathnex_topic }}"
+    topic_partitions: "{{ pathnex_topic_partitions }}"
+    topic_replication_factor: "{{ pathnex_topic_replication_factor }}"
+
+  tasks:
+    - name: Create topic if it does not exist
+      ansible.builtin.command:
+        cmd: >-
+          {{ kafka_install_dir }}/bin/kafka-topics.sh
+          --bootstrap-server {{ kafka_private_ip }}:9092
+          --create --if-not-exists
+          --topic {{ topic_name }}
+          --partitions {{ topic_partitions }}
+          --replication-factor {{ topic_replication_factor }}
+      register: topic_create
+      changed_when: "'Created topic' in topic_create.stdout"
+
+    - name: Describe topic
+      ansible.builtin.command:
+        cmd: >-
+          {{ kafka_install_dir }}/bin/kafka-topics.sh
+          --bootstrap-server {{ kafka_private_ip }}:9092
+          --describe --topic {{ topic_name }}
+      changed_when: false
+
+
+Practice:
+
+name: Create a Kafka topic and verify the cluster
+hosts:kafka[0]
+become_user:kafka
+gather_facts:false
+vars:
+ topic_name:
+ topic_partitions:
+ topic_replication_factor
+
+tasks:
+name: create topic if does not exist
+ansible.builtin.command
+ cmd:
+ --bootstrap-server
+ --create
+ --topic
+ --partitions
+ --replication-factor
+register:topic_create
+changed_when:
+
+
