@@ -1,0 +1,8 @@
+
+Todays Task:
+
+2 hour of training session on aws eks cluster
+30 min of introduction preparation
+1 hour of git push
+2 hour of practice code 
+
