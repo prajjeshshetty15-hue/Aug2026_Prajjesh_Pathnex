@@ -1,0 +1,46 @@
+
+Coding Practice:
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pathnex-grafana
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/pathnex/pathnex-argocd_lab.git'
+    targetRevision: main
+    path: grafana
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: pathnex-grafana-monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHea
+
+
+Practice:
+
+apiversion:
+kind:
+metadata:
+  name:
+  namespace:
+spec:
+ Project:
+ Source:
+ 
+
+ destination:
+  server:
+  namespcae:
+ syncpolicy:
+  automated:
+
+
+
