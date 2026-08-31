@@ -1,0 +1,113 @@
+
+
+Coding Practice:
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
+  }
+
+  required_version = ">= 1.5.0"
+}
+
+provider "aws" {
+  region = "ap-south-1"
+}
+
+# ============================================================
+# AMAZON LINUX 2023 AMI
+# ============================================================
+
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+
+  owners = ["137112412989"]
+
+  filter {
+    name   = "name"
+    values = ["al2023-ami-*-x86_64"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+}
+
+# ============================================================
+# EC2 INSTANCE - t3.micro
+# ============================================================
+
+resource "aws_instance" "t3_micro" {
+
+  ami           = data.aws_ami.amazon_linux.id
+  instance_type = "t3.micro"
+
+  key_name = "devops-key"
+
+  tags = {
+    Name = "terraform-t3-micro"
+  }
+}
+
+# ============================================================
+# OUTPUTS
+# ============================================================
+
+output "instance_id" {
+  value = aws_instance.t3_micro.id
+}
+
+output "public_ip" {
+  value = aws_instance.t3_micro.public_ip
+}
+
+output "private_ip" {
+  value = aws_instance.t3_micro.private_ip
+}
+
+output "instance_type" {
+  value = aws_instance.t3_micro.instance_type
+}
+
+
+Practice:
+
+terraform{
+  required providers{
+    aws=
+ }
+}
+AMAZON LINUX 2023 AMI
+  data "aws_ami" "amazon_linux"
+EC2 INSTANCE - t3.micro
+  resource "aws_instance" "t3_micro"
+   {
+   ami=
+   instace_type=
+   Key_name=
+   }
+Outputs:
+ output "instance_id"{
+}
+ output "public_ip"{
+}
+ output "private_ip"{
+}
+ output "instance_type"{
+}
+
+

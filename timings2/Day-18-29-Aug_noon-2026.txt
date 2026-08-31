@@ -1,0 +1,10 @@
+
+
+Todays Task:
+
+2 hours of training on kafka topic and cluster
+30 min of introduction video
+1 hour of git push code
+2 hour of code practice
+
+

@@ -1,0 +1,45 @@
+
+Coding Practice:
+
+replicaCount: 3
+
+image:
+  repository: grafana/grafana
+  tag: 10.0.0
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer          # Exposing Grafana to the internet
+  name: pathnex-grafana-service
+  port: 80                    # External port exposed by the service
+  targetPort: 3000            # The port Grafana is running on inside the container
+
+persistence:
+  enabled: true
+  size: 10Gi
+  storageClass: gp2
+
+
+
+Practice:
+
+replicacount: 3
+
+image:
+ repository: grafana/grafana
+ tag: 10.0.0
+ pullpolicy
+
+service:
+ type
+ name
+ port
+ target port
+
+Persistence:
+ enabled
+ size
+ storageclass
+
+
+
