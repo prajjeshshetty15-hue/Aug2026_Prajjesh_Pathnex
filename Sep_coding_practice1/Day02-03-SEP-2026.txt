@@ -1,0 +1,49 @@
+
+For Loop://///////////////////////////////////////--it will be knowing in advance how many times it get looped.
+vim for-loop.sh
+
+#!/bin/bash
+
+for name in Prajjesh Rahul John
+do
+    echo "Hello $name"
+done
+
+chmod +x for-loop.sh
+./for-loop.sh
+
+while Loop////////--Keep executing while a condition is true.
+vim count-check.sh
+
+#!/bin/bash
+
+count=1
+
+while [ "$count" -le 5 ]
+do
+    echo "Count: $count"
+    count=$((count + 1))
+done
+
+chmod +x count-check.sh
+./count-check.sh
+
+
+Practice:
+
+for name in 
+do
+	echo""
+done
+
+
+while loop:
+
+count=1
+
+while ["$count" -le 5 ]
+do
+	echo "Count: $count"
+	count=$((count + 1))
+done
+
