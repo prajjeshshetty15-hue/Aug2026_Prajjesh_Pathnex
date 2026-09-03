@@ -1,0 +1,37 @@
+
+
+Todays Task:
+
+vim file-check.sh
+
+#!/bin/bash
+
+file="test.txt"
+
+if [ -f "$file" ]; then
+    echo "File exists"
+    exit 0
+else
+    echo "File does not exist"
+    exit 1
+fi
+
+chmod +x file-check.sh
+./file-check.sh
+echo $?
+
+
+
+Practice:
+
+
+read -p " what is the name of the file : " file
+if [ -f "$file"]
+	echo ""
+else
+	echo""
+fi
+chmod +x file-check.sh
+./file-check.sh
+
+
