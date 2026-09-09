@@ -1,0 +1,42 @@
+
+
+Coding Practice:
+
+ ---
+- name: Set up a web server
+  hosts: webservers
+  become: true
+
+  tasks:
+
+    - name: Install Nginx
+      yum:
+        name: nginx
+        state: present
+
+    - name: Start Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+
+Practice:
+
+name:
+hosts:
+become:
+
+Tasks: 
+ name: install Nginx
+ yum:
+  name:nginx
+  state:present
+
+ name: Start Nginx
+ Service:
+  name:nginx
+  state:
+  enabled:
+
+
