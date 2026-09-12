@@ -1,0 +1,22 @@
+
+
+Todays Task:
+
+3.2 Create HTML page
+nano index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Docker Application</title>
+</head>
+<body>
+    <h1>Hello from My Docker Container!</h1>
+    <p>This website is running inside Docker on AWS EC2.</p>
+</body>
+</html>
+
+
+
+
+
