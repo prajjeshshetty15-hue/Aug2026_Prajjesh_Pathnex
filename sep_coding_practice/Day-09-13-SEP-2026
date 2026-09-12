@@ -1,0 +1,14 @@
+Create HTML in host directory/////////////
+nano nginx-data/index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Docker Volume Practical</title>
+</head>
+<body>
+    <h1>Hello from Docker Volume!</h1>
+    <p>This HTML file is stored on the EC2 host.</p>
+</body>
+</html>
+
