@@ -1,0 +1,14 @@
+
+Khafka Topic ceation:
+
+Yaml.
+
+
+name: create topic
+
+  {{ kafka_install_dir }}/bin/kafka-topics.sh
+
+boot start server
+topic: topic name
+partition: (partition name)
+replication factor : ( topic replication factor) 

@@ -1,0 +1,20 @@
+
+
+Khafka: Backennd.tf
+
+
+Terraform
+
+Required  Version=
+
+
+Required  providers
+    aws =
+         source
+         Version
+
+    local=
+         source
+         Version
+
+           

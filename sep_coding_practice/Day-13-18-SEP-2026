@@ -1,0 +1,19 @@
+
+Khafka 
+
+
+Terrfaorm
+
+Required_Version 
+
+Required_providers
+
+     aws =
+        source=
+        version=
+
+     local=
+        source=
+        version=
+
+
