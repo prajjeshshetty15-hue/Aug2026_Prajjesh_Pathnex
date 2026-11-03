@@ -1,0 +1,10 @@
+
+Todays practice
+
+1. EC2 instance and github creation,git push, git commit for 3 hours.
+2. GIT push for 1 hour 
+3. Introduction video for 30 min
+
+
+
+

@@ -1,0 +1,18 @@
+
+Coding Practice
+
+Backnd.tf
+
+
+Practice
+
+
+terraform {
+ backend "s3" {
+  bucket   = " Prajjesh"
+  key      = " admin_ky"
+  region   = "us-east-1"
+  dynamodb_table="terraform-locks"
+  encrypt  = true
+}
+
