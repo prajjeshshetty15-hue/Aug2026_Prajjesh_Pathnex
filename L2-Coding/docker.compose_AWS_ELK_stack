@@ -1,0 +1,64 @@
+
+Coding practice:
+
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${elastic_version}
+    container_name: elasticsearch
+    restart: unless-stopped
+    environment:
+      - cluster.name=pathnex-lab
+      - node.name=es-single
+      - discovery.type=single-node
+      - ELASTIC_PASSWORD=${elastic_password}
+      - xpack.security.enabled=true
+      - xpack.security.http.ssl.enabled=false
+      - xpack.security.transport.ssl.enabled=false
+      - xpack.ml.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:${elastic_version}
+    container_name: kibana
+    restart: unless-stopped
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      # Important: use service account token, not elastic username
+      - ELASTICSEARCH_SERVICEACCOUNT_TOKEN=$${KIBANA_SERVICE_TOKEN}
+      - NODE_OPTIONS=--max-old-space-size=256
+      - SERVER_HOST=0.0.0.0
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:${elastic_version}
+    container_name: logstash
+    restart: unless-stopped
+    environment:
+      - LS_JAVA_OPTS=-Xms256m -Xmx256m
+      - ELASTIC_PASSWORD=${elastic_password}
+    volumes:
+      - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+    ports:
+      - "5044:5044"
+    depends_on:
+      - elasticsearch
+
+volumes:
+  es-data:
+
+
+
+
+
+
+
+
+
