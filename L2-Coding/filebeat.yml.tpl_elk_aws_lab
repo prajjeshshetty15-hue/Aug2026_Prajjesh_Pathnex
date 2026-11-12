@@ -1,0 +1,28 @@
+
+filebeat.inputs:
+  - type: filestream
+    id: docker-containers
+    enabled: true
+    parsers:
+      - container:
+          stream: all
+          format: docker
+    paths:
+      - /var/lib/docker/containers/*/*.log
+
+  - type: filestream
+    id: syslog
+    enabled: true
+    paths:
+      - /var/log/syslog
+      - /var/log/auth.log
+
+output.logstash:
+  hosts: ["${logstash_host}:5044"]
+
+setup.template.enabled: false
+setup.ilm.enabled: false
+logging.level: info
+
+
+
